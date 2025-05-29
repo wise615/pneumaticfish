@@ -1,2 +1,2 @@
-# pneumaticfish
-ENGR 1UW Final Project
+# PneumaticFish - UCLA ENGR 1UW Final Project
+
