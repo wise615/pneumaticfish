@@ -29,7 +29,7 @@ int left_solenoid_state = 0;                  // Let 0 be closed and 1 be open
 int right_solenoid_state = 0;                 // Let 0 be closed and 1 be open
 int left_deflate = 0;                         // Let 0 be inactive, 1 be inflating, and 2 be deflating
 int right_deflate = 0;                        // Let 0 be inactive, 1 be inflating, and 2 be deflating
-const unsigned long max_solenoid_time = 500;  // Max inflating time - can change!
+const unsigned long max_solenoid_time = 1000;  // Max inflating time - can change!
 const unsigned long deflate_time = 500;       // Deflating time in between inflating - can change!
 unsigned long left_deflate_start_time = 0;
 unsigned long right_deflate_start_time = 0;
@@ -174,8 +174,8 @@ void loop() {
     digitalWrite(right_solenoid_air, LOW);  // May need to reverse depending on solenoid
     left_solenoid_state = 0;
     right_solenoid_state = 0;
-    left_deflate = 1;
-    right_deflate = 1;
+    left_deflate = 0;
+    right_deflate = 0;
   }
 
   // Enforce max solenoid time
