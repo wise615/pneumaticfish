@@ -13,13 +13,13 @@ A Biomimetic Underwater Robot Designed to Navigate an Obstacle Course, Outfitted
 
 **PneumaticFish** is an underwater robot controlled by an Arduino Mega 2560, designed to navigate an underwater obstacle course. Designed with the constraints set for the ENGR 1UW course at UCLA, this robot features three motors and a dual-pneumatic tail, enabling it to move with four degrees of freedom. <br/>
 
-**PneumaticFish** has a 3D-printed chassis, with three motors mounted at the head, center, and tail. The tail is printed in **x** parts, with pneumatic tubes running lengthwise through the entire tail and silicone soft pneumatic actuators inserted in between each tail segment. 
+**PneumaticFish** has a 3D-printed chassis, with three motors mounted at the head, center, and tail. The tail is printed in _**x**_ parts, with pneumatic tubes running lengthwise through the entire tail and silicone soft pneumatic actuators inserted in between each tail segment. 
 
 ## Materials and Robot Setup
 
 **PneumaticFish** requires the following materials in its setup: 
 * 2x 1/4" 12V 2-Position 3-Way Solenoid Valve [Link](https://a.co/d/4U33Og6)
-* 3x Bilge Pump Motor **Need Link**
+* 3x Bilge Pump Motor _**Need Link**_
 * 1x Arduino Mega 2560 [Link](https://a.co/d/d7fq8C4)
 * 1x Solderless Breadboard [Link](https://a.co/d/1CJI7wi)
 * 2x Dual-Axis Joystick Module [Link](https://a.co/d/fT2if6U)
