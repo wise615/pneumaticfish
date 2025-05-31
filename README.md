@@ -40,8 +40,8 @@ When setting up the Arduino Mega 2560, connect each electrical component accordi
 ## Usage
 
 Usage of **PneumaticFish** is straightforward. 
-1. Download `pneumaticfish.cpp` and rename the file extension to `pneumaticfish.ino`.
-2. Open `pneumaticfish.ino` in Ardunio IDE (Download [here](https://www.arduino.cc/en/software/) if you haven't already).
+1. Download `PneumaticFish.cpp` and rename the file extension to `PneumaticFish.ino`.
+2. Open `PneumaticFish.ino` in Ardunio IDE (Download [here](https://www.arduino.cc/en/software/) if you haven't already).
 3. Connect the Ardunio Mega 2560 to all of the electrical modules according to the setup described in [Materials and Robot Setup](#materials-and-robot-setup).
 4. Connect the Ardunio Mega 2560 to your computer using a USB 2.0 Type B cable. Make sure "Ardunio Mega 2560" is selected as the COM port in Ardunio IDE.
 5. Upload the code to the microcontroller and enjoy!
