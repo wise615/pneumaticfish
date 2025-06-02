@@ -19,7 +19,7 @@ A Biomimetic Underwater Robot Designed to Navigate an Obstacle Course, Outfitted
 
 **PneumaticFish** requires the following materials in its setup: 
 * 2x 1/4" 12V 2-Position 3-Way Solenoid Valve [Link](https://a.co/d/4U33Og6)
-* 3x Bilge Pump Motor _**Need Link**_
+* 3x Bilge Pump Motor [Link](https://a.co/d/9LZzbxg)
 * 1x Arduino Mega 2560 [Link](https://a.co/d/d7fq8C4)
 * 1x Solderless Breadboard [Link](https://a.co/d/1CJI7wi)
 * 2x Dual-Axis Joystick Module [Link](https://a.co/d/fT2if6U)
