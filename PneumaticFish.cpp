@@ -58,7 +58,7 @@ void setup() {
   pinMode(right_solenoid_air, OUTPUT);
 }
 
-bool in_deadzone(int value, int center = 512, int threshold = 20) { // Can change threshold!
+bool in_deadzone(int value, int center = 512, int threshold = 50) { // Can change threshold!
   return ((value >= center - threshold) && (value <= center + threshold));
 }
 
@@ -88,7 +88,7 @@ void loop() {
   // Sets z_translational motor direction
   if (z_toggle_state == 0) {
     if (!in_deadzone(z_pos_value)) {
-      if (z_pos_value < 492) {  // Move up
+      if (z_pos_value < 462) {  // Move up
         digitalWrite(z_trans_pos, HIGH);
         digitalWrite(z_trans_neg, LOW);
       } else {  // Move down
@@ -104,7 +104,7 @@ void loop() {
   // Sets z_angular motor direction
   if (z_toggle_state == 1) {
     if (!in_deadzone(z_pos_value)) {
-      if (z_pos_value < 492) {  // Angle upwards
+      if (z_pos_value < 462) {  // Angle upwards
         digitalWrite(z_ang_pos, HIGH);
         digitalWrite(z_ang_neg, LOW);
       } else {
@@ -119,7 +119,7 @@ void loop() {
 
   // Sets y motor direction
   if (!in_deadzone(y_pos_value)) {
-    if (y_pos_value < 492) {  // Move forward
+    if (y_pos_value < 482) {  // Move forward
       digitalWrite(y_pos, HIGH);
       digitalWrite(y_neg, LOW);
     } else {  // Move backward
@@ -146,32 +146,33 @@ void loop() {
     // UPDATE: previous update is incorrect. Solenoids normally open. Now inflates for max_solenoid_time, deflates for deflate_time, & repeats
     // UPDATE: Solenoids normally closed. 
     // Inflating R moves tail L and fish turns L
-    if (x_pos_value < 492) {  // Move left
+    // UPDATE: Solenoids now normally closed
+    if (x_pos_value < 462) {  // Move left
       // Turn off left solenoids first
-      digitalWrite(left_solenoid_air, LOW);  // May need to reverse depending on solenoid
+      digitalWrite(left_solenoid_air, HIGH);  // May need to reverse depending on solenoid
       left_solenoid_state = 0;
       left_deflate = 0;
       if (right_deflate == 0) {
-        digitalWrite(right_solenoid_air, HIGH);  // May need to reverse depending on solenoid
+        digitalWrite(right_solenoid_air, LOW);  // May need to reverse depending on solenoid
         right_start_time = time;
         right_deflate = 1; 
         right_solenoid_state = 1;
       }
     } else {  // Move right
       // Turn off right solenoids first
-      digitalWrite(right_solenoid_air, LOW);  // May need to reverse depending on solenoid
+      digitalWrite(right_solenoid_air, HIGH);  // May need to reverse depending on solenoid
       right_solenoid_state = 0;
       right_deflate = 0;
       if (left_deflate == 0) {
-        digitalWrite(left_solenoid_air, HIGH);  // May need to reverse depending on solenoid
+        digitalWrite(left_solenoid_air, LOW);  // May need to reverse depending on solenoid
         left_start_time = time;
         left_deflate = 1; 
         left_solenoid_state = 1;
       }
     }
   } else {                                   // Straight y-axis movement (tail neutral position)
-    digitalWrite(left_solenoid_air, LOW);   // May need to reverse depending on solenoid
-    digitalWrite(right_solenoid_air, LOW);  // May need to reverse depending on solenoid
+    digitalWrite(left_solenoid_air, HIGH);   // May need to reverse depending on solenoid
+    digitalWrite(right_solenoid_air, HIGH);  // May need to reverse depending on solenoid
     left_solenoid_state = 0;
     right_solenoid_state = 0;
     left_deflate = 0;
@@ -180,13 +181,13 @@ void loop() {
 
   // Enforce max solenoid time
   if (left_solenoid_state == 1 && (time - left_start_time >= max_solenoid_time)) {
-    digitalWrite(left_solenoid_air, LOW);  // May need to reverse depending on solenoid
+    digitalWrite(left_solenoid_air, HIGH);  // May need to reverse depending on solenoid
     left_deflate_start_time = time;
     left_deflate = 2;
     left_solenoid_state = 0;
   }
   if (right_solenoid_state == 1 && (time - right_start_time >= max_solenoid_time)) {
-    digitalWrite(right_solenoid_air, LOW);  // May need to reverse depending on solenoid
+    digitalWrite(right_solenoid_air, HIGH);  // May need to reverse depending on solenoid
     right_deflate_start_time = time;
     right_deflate = 2;
     right_solenoid_state = 0;
@@ -201,6 +202,9 @@ void loop() {
     right_deflate = 0;
     right_solenoid_state = 0;
   }
-
+  Serial.print(left_solenoid_state); 
+  Serial.print(left_deflate); 
+  Serial.print(right_solenoid_state); 
+  Serial.println(right_deflate); 
   delay(10);  // Slight delay for stability
 }
