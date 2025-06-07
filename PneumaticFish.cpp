@@ -29,8 +29,8 @@ int left_solenoid_state = 0;                  // Let 0 be closed and 1 be open
 int right_solenoid_state = 0;                 // Let 0 be closed and 1 be open
 int left_deflate = 0;                         // Let 0 be inactive, 1 be inflating, and 2 be deflating
 int right_deflate = 0;                        // Let 0 be inactive, 1 be inflating, and 2 be deflating
-const unsigned long max_solenoid_time = 1000;  // Max inflating time - can change!
-const unsigned long deflate_time = 500;       // Deflating time in between inflating - can change!
+const unsigned long max_solenoid_time = 500;  // Max inflating time - can change!
+const unsigned long deflate_time = 1500;       // Deflating time in between inflating - can change!
 unsigned long left_deflate_start_time = 0;
 unsigned long right_deflate_start_time = 0;
 unsigned long left_start_time = 0;
@@ -58,7 +58,7 @@ void setup() {
   pinMode(right_solenoid_air, OUTPUT);
 }
 
-bool in_deadzone(int value, int center = 512, int threshold = 50) { // Can change threshold!
+bool in_deadzone(int value, int center = 512, int threshold = 100) { // Can change threshold!
   return ((value >= center - threshold) && (value <= center + threshold));
 }
 
@@ -88,7 +88,7 @@ void loop() {
   // Sets z_translational motor direction
   if (z_toggle_state == 0) {
     if (!in_deadzone(z_pos_value)) {
-      if (z_pos_value < 462) {  // Move up
+      if (z_pos_value < 412) {  // Move up
         digitalWrite(z_trans_pos, HIGH);
         digitalWrite(z_trans_neg, LOW);
       } else {  // Move down
@@ -104,7 +104,7 @@ void loop() {
   // Sets z_angular motor direction
   if (z_toggle_state == 1) {
     if (!in_deadzone(z_pos_value)) {
-      if (z_pos_value < 462) {  // Angle upwards
+      if (z_pos_value < 412) {  // Angle upwards
         digitalWrite(z_ang_pos, HIGH);
         digitalWrite(z_ang_neg, LOW);
       } else {
@@ -119,7 +119,7 @@ void loop() {
 
   // Sets y motor direction
   if (!in_deadzone(y_pos_value)) {
-    if (y_pos_value < 482) {  // Move forward
+    if (y_pos_value < 412) {  // Move forward
       digitalWrite(y_pos, HIGH);
       digitalWrite(y_neg, LOW);
     } else {  // Move backward
@@ -147,7 +147,7 @@ void loop() {
     // UPDATE: Solenoids normally closed. 
     // Inflating R moves tail L and fish turns L
     // UPDATE: Solenoids now normally closed
-    if (x_pos_value < 462) {  // Move left
+    if (x_pos_value < 412) {  // Move left
       // Turn off left solenoids first
       digitalWrite(left_solenoid_air, HIGH);  // May need to reverse depending on solenoid
       left_solenoid_state = 0;
@@ -202,9 +202,10 @@ void loop() {
     right_deflate = 0;
     right_solenoid_state = 0;
   }
-  Serial.print(left_solenoid_state); 
-  Serial.print(left_deflate); 
-  Serial.print(right_solenoid_state); 
-  Serial.println(right_deflate); 
+  // Serial.print(left_solenoid_state); 
+  // Serial.print(left_deflate); 
+  // Serial.print(right_solenoid_state); 
+  // Serial.println(right_deflate); 
+  Serial.println(z_toggle_state); 
   delay(10);  // Slight delay for stability
 }
